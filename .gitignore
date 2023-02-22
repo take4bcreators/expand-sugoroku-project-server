@@ -1,0 +1,11 @@
+.vagrant
+.vscode/*
+work/*
+sync/env/*
+sync/work/*
+*.log
+*.tmp
+*.env
+
+!*.template
+!.gitkeep
