@@ -46,3 +46,35 @@ ALTER GROUP sugorokugrp ADD USER storage;
 -- 終了メッセージ
 \echo '======= ユーザー・データベース・グループ作成SQL完了 ======='
 \! date
+
+
+\echo '======= スキーマの作成======='
+\! date
+
+--スキーマの作成
+CREATE SCHEMA prd;
+CREATE SCHEMA dev;
+CREATE SCHEMA work;
+
+
+-- オブジェクトへのアクセス権限を付与する
+GRANT USAGE ON SCHEMA prd TO cafegrp;
+GRANT USAGE ON SCHEMA dev TO cafegrp;
+GRANT USAGE ON SCHEMA work TO cafegrp;
+
+
+-- CREATE TABLE などのオブジェクト作成権限を与える
+GRANT CREATE ON SCHEMA prd TO cafegrp;
+GRANT CREATE ON SCHEMA dev TO cafegrp;
+GRANT CREATE ON SCHEMA work TO cafegrp;
+
+
+-- DBを一旦抜ける
+\q
+
+
+-- 終了メッセージ
+\echo '======= スキーマの作成======='
+\! date
+
+

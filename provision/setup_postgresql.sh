@@ -51,3 +51,44 @@ sudo -i -u postgres psql -f "${PROVISION_SQL_DIR}/create_user_db_group.sql"
 date
 echo "■ PostgreSQLのセットアップ 完了"
 exit 0
+
+
+# postgres ユーザで作成した DB にログインする
+psql -d sgpjdb01 -U postgres
+
+
+# root ユーザに切替
+su -
+
+# postgresql.conf を探す
+find / -name 'postgresql.conf'
+
+# postgresql.conf の情報確認
+ls -l /etc/postgresql-setup/upgrade/postgresql.conf
+ls -l /var/lib/pgsql/data/postgresql.conf
+ls -l /usr/lib/tmpfiles.d/postgresql.conf
+
+
+# postgresql.conf の内容確認
+cat /etc/postgresql-setup/upgrade/postgresql.conf
+cat /var/lib/pgsql/data/postgresql.conf
+cat /usr/lib/tmpfiles.d/postgresql.conf
+
+
+# postgresql.conf の内容変更
+sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/' /etc/postgresql-setup/upgrade/postgresql.conf
+sed -i 's/# port = 5432/port = 5432/' /etc/postgresql-setup/upgrade/postgresql.conf
+
+sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/' /var/lib/pgsql/data/postgresql.conf
+sed -i 's/# port = 5432/port = 5432/' /var/lib/pgsql/data/postgresql.conf
+
+sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/' /usr/lib/tmpfiles.d/postgresql.conf
+sed -i 's/# port = 5432/port = 5432/' /usr/lib/tmpfiles.d/postgresql.conf
+
+
+# サービス再起動
+systemctl restart postgresql
+
+
+# サービス確認（activeになっていること）
+systemctl status postgresql
