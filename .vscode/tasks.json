@@ -1,0 +1,77 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "[01] Vagrant仮想環境 作成・起動",
+            "detail": "VagrantのBoxファイルと仮想環境を作成、起動します",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/mac/01_create_and_start.command",
+            "args": [],
+            "group": "build",
+            "presentation": {
+              "reveal": "always",
+              "clear": true,
+              "echo": true
+            },
+            "problemMatcher": [],
+            "windows": {
+              "command": "${workspaceFolder}\\script\\windows\\01_create_and_start.bat"
+            },
+        },
+        {
+            "label": "[02] Vagrant仮想環境 停止・削除",
+            "detail": "Vagrantで起動中の仮想環境を停止、Boxファイルと仮想環境を削除します",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/mac/02_stop_and_remove.command",
+            "args": [],
+            "group": "build",
+            "presentation": {
+              "reveal": "always",
+              "clear": true,
+              "echo": true
+            },
+            "problemMatcher": [],
+            "windows": {
+              "command": "${workspaceFolder}\\script\\windows\\02_stop_and_remove.bat"
+            },
+        },
+        {
+            "label": "[03-01] Vagrantサーバー SSH接続 (127.0.0.1:2222)",
+            "detail": "VagrantサーバーにSSH接続します",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/mac/03_01_ssh_connect_nat.command",
+            "args": [],
+            "group": "build",
+            "presentation": {
+              "reveal": "always",
+              "clear": true,
+              "echo": true
+            },
+            "problemMatcher": [],
+            "windows": {
+              "label": "[03-01] Vagrantサーバー Teraterm接続 (127.0.0.1:2222)",
+              "detail": "VagrantサーバーにTeratermで接続します",
+              "command": "${workspaceFolder}\\script\\windows\\03_01_ssh_connect_nat.bat"
+            },
+        },
+        {
+            "label": "[03-02] Vagrantサーバー SSH接続 (192.168.60.10)",
+            "detail": "VagrantサーバーにSSH接続します",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/mac/03_02_ssh_connect_hostonlyadapter.command",
+            "args": [],
+            "group": "build",
+            "presentation": {
+              "reveal": "always",
+              "clear": true,
+              "echo": true
+            },
+            "problemMatcher": [],
+            "windows": {
+              "label": "[03-02] Vagrantサーバー Teraterm接続 (192.168.60.10)",
+              "detail": "VagrantサーバーにTeratermで接続します",
+              "command": "${workspaceFolder}\\script\\windows\\03_02_ssh_connect_hostonlyadapter.bat"
+            },
+        },
+    ]
+}
