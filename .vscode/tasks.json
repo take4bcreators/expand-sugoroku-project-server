@@ -59,7 +59,7 @@
       },
       {
         "label": "[03-01] Vagrantサーバー SSH接続 (127.0.0.1:2222)",
-        "detail": "VagrantサーバーにSSH接続します。Windows環境では Teraterm を起動します",
+        "detail": "VagrantサーバーにSSH接続します。",
         "icon": {
           "color": "terminal.ansiGreen",
           "id": "vm-connect"
@@ -87,7 +87,7 @@
       },
       {
         "label": "[03-02] Vagrantサーバー SSH接続 (192.168.60.10)",
-        "detail": "VagrantサーバーにSSH接続します。Windows環境では Teraterm を起動します",
+        "detail": "VagrantサーバーにSSH接続します。",
         "icon": {
           "color": "terminal.ansiGreen",
           "id": "vm-connect"
@@ -104,6 +104,62 @@
         "problemMatcher": [],
         "windows": {
           "command": "${workspaceFolder}\\script\\windows\\03_02_ssh_connect_hostonlyadapter.bat",
+          "args": [],
+          "options": {
+            "shell": {
+              "executable": "${env:windir}\\system32\\cmd.exe",
+              "args": ["/C"],
+            }
+          }
+        }
+      },
+      {
+        "label": "[03-03] Vagrantサーバー Teraterm 接続 (127.0.0.1:2222)",
+        "detail": "Vagrantサーバーに Teraterm で接続します。Windows環境専用です",
+        "icon": {
+          "color": "terminal.ansiGreen",
+          "id": "vm-connect"
+        },
+        "type": "shell",
+        "command": "これは Windows専用 タスクです",
+        "args": [],
+        "group": "none",
+        "presentation": {
+          "reveal": "always",
+          "clear": true,
+          "echo": true
+        },
+        "problemMatcher": [],
+        "windows": {
+          "command": "${workspaceFolder}\\script\\windows\\03_03_teraterm_connect_nat.bat",
+          "args": [],
+          "options": {
+            "shell": {
+              "executable": "${env:windir}\\system32\\cmd.exe",
+              "args": ["/C"],
+            }
+          }
+        }
+      },
+      {
+        "label": "[03-04] Vagrantサーバー Teraterm 接続 (192.168.60.10)",
+        "detail": "Vagrantサーバーに Teraterm で接続します。Windows環境専用です",
+        "icon": {
+          "color": "terminal.ansiGreen",
+          "id": "vm-connect"
+        },
+        "type": "shell",
+        "command": "echo 'これは Windows専用 タスクです'",
+        "args": [],
+        "group": "none",
+        "presentation": {
+          "reveal": "always",
+          "clear": true,
+          "echo": true
+        },
+        "problemMatcher": [],
+        "windows": {
+          "command": "${workspaceFolder}\\script\\windows\\03_04_teraterm_connect_hostonlyadapter.bat",
           "args": [],
           "options": {
             "shell": {
