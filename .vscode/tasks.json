@@ -17,6 +17,12 @@
             "windows": {
               "command": "${workspaceFolder}\\script\\windows\\01_create_and_start.bat",
               "args": [],
+              "options": {
+                "shell": {
+                  "executable": "${env:windir}\\system32\\cmd.exe",
+                  "args": ["/C"],
+                },
+              },
             },
         },
         {
@@ -35,11 +41,17 @@
             "windows": {
               "command": "${workspaceFolder}\\script\\windows\\02_stop_and_remove.bat",
               "args": [],
+              "options": {
+                "shell": {
+                  "executable": "${env:windir}\\system32\\cmd.exe",
+                  "args": ["/C"],
+                },
+              },
             },
         },
         {
             "label": "[03-01] Vagrantサーバー SSH接続 (127.0.0.1:2222)",
-            "detail": "VagrantサーバーにSSH接続します",
+            "detail": "VagrantサーバーにSSH接続します。Windows環境では Teraterm を起動します",
             "type": "shell",
             "command": "${workspaceFolder}/script/mac/03_01_ssh_connect_nat.command",
             "args": [],
@@ -51,14 +63,19 @@
             },
             "problemMatcher": [],
             "windows": {
-              "label": "[03-01] Vagrantサーバー Teraterm接続 (127.0.0.1:2222)",
-              "detail": "VagrantサーバーにTeratermで接続します",
-              "command": "${workspaceFolder}\\script\\windows\\03_01_ssh_connect_nat.bat"
+              "command": "${workspaceFolder}\\script\\windows\\03_01_ssh_connect_nat.bat",
+              "args": [],
+              "options": {
+                "shell": {
+                  "executable": "${env:windir}\\system32\\cmd.exe",
+                  "args": ["/C"],
+                },
+              },
             },
         },
         {
             "label": "[03-02] Vagrantサーバー SSH接続 (192.168.60.10)",
-            "detail": "VagrantサーバーにSSH接続します",
+            "detail": "VagrantサーバーにSSH接続します。Windows環境では Teraterm を起動します",
             "type": "shell",
             "command": "${workspaceFolder}/script/mac/03_02_ssh_connect_hostonlyadapter.command",
             "args": [],
@@ -70,9 +87,14 @@
             },
             "problemMatcher": [],
             "windows": {
-              "label": "[03-02] Vagrantサーバー Teraterm接続 (192.168.60.10)",
-              "detail": "VagrantサーバーにTeratermで接続します",
-              "command": "${workspaceFolder}\\script\\windows\\03_02_ssh_connect_hostonlyadapter.bat"
+              "command": "${workspaceFolder}\\script\\windows\\03_02_ssh_connect_hostonlyadapter.bat",
+              "args": [],
+              "options": {
+                "shell": {
+                  "executable": "${env:windir}\\system32\\cmd.exe",
+                  "args": ["/C"],
+                },
+              },
             },
         },
         {
@@ -89,7 +111,14 @@
             },
             "problemMatcher": [],
             "windows": {
-              "command": "${workspaceFolder}\\script\\windows\\04_check_status.bat"
+              "command": "${workspaceFolder}\\script\\windows\\04_check_status.bat",
+              "args": [],
+              "options": {
+                "shell": {
+                  "executable": "${env:windir}\\system32\\cmd.exe",
+                  "args": ["/C"],
+                },
+              },
             },
         },
     ]
