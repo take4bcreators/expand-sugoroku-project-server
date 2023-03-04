@@ -10,13 +10,23 @@ set REMOVE_BOX_NAME=sgpjbox
 @REM --------------------------------------------------------------------------------------------
 
 
-@REM 実行確認用メッセージ表示
+@REM 開始メッセージ
 echo.
 echo ■ Vagrant 停止用スクリプト
 echo.
-echo ・中止する場合はこのままウィンドウを閉じてください。
-echo.
-pause
+
+@REM オプションチェック
+set askuser=true
+if "%~1" == "/Y" (
+    set askuser=false
+)
+
+@REM ユーザー確認用メッセージ表示
+if "%askuser%" == "true" (
+    echo ・中止する場合はこのままウィンドウを閉じてください。
+    echo.
+    pause
+)
 
 
 @REM 開始処理
@@ -132,6 +142,10 @@ echo ■ 処理が完了しました
 echo.
 echo ■ 正常終了
 echo %date% %time%
-echo.
-pause
+
+@REM ユーザー確認用メッセージ表示
+if "%askuser%" == "true" (
+    pause
+)
+
 exit /b 0
