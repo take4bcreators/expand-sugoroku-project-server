@@ -8,29 +8,11 @@ set VAGRANT_FILE_DIR_ABS=..\..
 @REM --------------------------------------------------------------------------------------------
 
 
-@REM 開始メッセージ
-echo.
-echo ■ Vagrant 起動用スクリプト
-echo.
-
 @REM オプションチェック
 set askuser=true
 if "%~1" == "/Y" (
     set askuser=false
 )
-
-@REM ユーザー確認用メッセージ表示
-if "%askuser%" == "true" (
-    echo ・中止する場合はこのままウィンドウを閉じてください。
-    echo.
-    pause
-)
-
-
-@REM 開始処理
-echo.
-echo ■ 処理開始
-echo %date% %time%
 
 @REM Vagrantfile が対象ディレクトリにない場合は終了
 cd %~dp0
@@ -50,48 +32,25 @@ if not exist %VAGRANT_FILE_DIR_ABS%\Vagrantfile (
 cd %VAGRANT_FILE_DIR_ABS%\
 
 
-
-@REM BOX追加・仮想環境作成・起動
+@REM 情報確認
+echo.
+echo ■ Vagrant 状態確認
+echo.
 echo.
 echo ■ 追加前のBOXの一覧 [vagrant box list]
 vagrant box list
 echo.
+echo.
 echo ■ 起動前の仮想環境の状態 [vagrant status]
 vagrant status
 echo.
-echo ■ BOXの追加と仮想環境の作成・起動を行います [vagrant up]
-vagrant up
-set rtn_cd=%errorlevel%
-echo %rtn_cd%
-if %rtn_cd% neq 0 (
-    echo ■ ERROR  仮想環境起動でエラーが発生しました
-    echo ■ 戻り値： %rtn_cd%
-    echo.
-    echo ■ 異常終了
-    echo %date% %time%
-    echo.
-    pause
-    exit /b %rtn_cd%
-)
 echo.
-echo ■ 追加後のBOXの一覧 [vagrant box list]
-vagrant box list
+echo ■ 仮想マシン一覧 [vagrant global-status]
+vagrant global-status
 echo.
-echo ■ 起動後の仮想環境の状態 [vagrant status]
-vagrant status
-
-
-
-@REM 終了処理
-echo.
-echo ■ 処理が完了しました
-echo.
-echo ■ 正常終了
-echo %date% %time%
 
 @REM ユーザー確認用メッセージ表示
 if "%askuser%" == "true" (
-    echo.
     pause
 )
 

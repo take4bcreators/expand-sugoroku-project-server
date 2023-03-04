@@ -8,11 +8,6 @@ VAGRANT_FILE_DIR_ABS="../.."
 # --------------------------------------------------------------------------------------------
 
 
-# 開始メッセージ
-echo
-echo "■ Vagrant 開始用スクリプト"
-echo
-
 # オプションチェック
 askuser="true"
 while getopts y option; do
@@ -26,21 +21,6 @@ while getopts y option; do
             ;;
     esac
 done
-
-# ユーザー確認用メッセージ表示
-if [ "${askuser}" = "true" ]; then
-    echo "・中止する場合はこのままウィンドウを閉じてください。"
-    echo
-    echo -n "続行するには Return キー を押してください . . ."
-    read -s
-    echo
-fi
-
-
-# 開始処理
-echo
-echo "■ 処理開始"
-date
 
 # Vagrantfile が対象ディレクトリにない場合は終了
 cd "$(dirname $0)"
@@ -61,46 +41,22 @@ fi
 # Vagrantfile のあるディレクトリに移動
 cd "${VAGRANT_FILE_DIR_ABS}/"
 
-
-
-# BOX追加・仮想環境作成・起動
+# 情報確認
 echo
-echo "■ 追加前のBOXの一覧 [vagrant box list]"
+echo "■ Vagrant 状態確認"
+echo
+echo
+echo "■ BOX一覧 [vagrant box list]"
 vagrant box list
 echo
-echo "■ 起動前の仮想環境の状態 [vagrant status]"
+echo
+echo "■ 仮想環境の状態 [vagrant status]"
 vagrant status
 echo
-echo "■ BOXの追加と仮想環境の作成・起動を行います [vagrant up]"
-vagrant up
-rtn_cd=$?
-if [ ${rtn_cd} -ne 0 ]; then
-    echo "■ ERROR  仮想環境起動でエラーが発生しました"
-    echo "■ 戻り値：${rtn_cd}"
-    echo
-    echo "■ 異常終了"
-    date
-    echo
-    echo -n "続行するには Return キー を押してください . . ."
-    read -s
-    echo
-    exit ${rtn_cd}
-fi
 echo
-echo "■ 追加後のBOXの一覧 [vagrant box list]"
-vagrant box list
+echo "■ 仮想マシン一覧 [vagrant global-status]"
+vagrant global-status
 echo
-echo "■ 起動後の仮想環境の状態 [vagrant status]"
-vagrant status
-
-
-
-# 終了処理
-echo
-echo "■ 処理が完了しました"
-echo
-echo "■ 正常終了"
-date
 
 # ユーザー確認用メッセージ表示
 if [ "${askuser}" = "true" ]; then

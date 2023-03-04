@@ -10,15 +10,33 @@ REMOVE_BOX_NAME="sgpjbox"
 # --------------------------------------------------------------------------------------------
 
 
-# 実行確認用メッセージ表示
+# 開始メッセージ
 echo
 echo "■ Vagrant 停止用スクリプト"
 echo
-echo "・中止する場合はこのままウィンドウを閉じてください。"
-echo
-echo -n "続行するには Return キー を押してください . . ."
-read -s
-echo
+
+# オプションチェック
+askuser="true"
+while getopts y option; do
+    case "${option}" in
+        y)
+            askuser="false"
+            ;;
+        \?)
+            echo "Usage: $0 [-y]" 1>&2
+            exit 1
+            ;;
+    esac
+done
+
+# ユーザー確認用メッセージ表示
+if [ "${askuser}" = "true" ]; then
+    echo "・中止する場合はこのままウィンドウを閉じてください。"
+    echo
+    echo -n "続行するには Return キー を押してください . . ."
+    read -s
+    echo
+fi
 
 
 # 開始処理
@@ -144,8 +162,13 @@ echo "■ 処理が完了しました"
 echo
 echo "■ 正常終了"
 date
-echo
-echo -n "続行するには Return キー を押してください . . ."
-read -s
-echo
+
+# ユーザー確認用メッセージ表示
+if [ "${askuser}" = "true" ]; then
+    echo
+    echo -n "続行するには Return キー を押してください . . ."
+    read -s
+    echo
+fi
+
 exit 0

@@ -11,7 +11,12 @@ set CONNECT_KEY=..\..\.vagrant\machines\default\virtualbox\private_key
 
 cd %~dp0
 
-@REM 鍵認証方式で Teraterm を開く
-@REM  「start /b cmd /c コマンド」 でバックグラウンド起動させて、
-@REM  このバッチ自体のウィンドウは直ぐに閉じるようにする
-start /b cmd /c "C:\Program Files (x86)\teraterm\ttermpro.exe" %CONNECT_IP% /auth=publickey /user=%CONNECT_USER% /keyfile=%~dp0\%CONNECT_KEY%
+@REM vagrant up でキーを再作成してSSH接続するとホスト認証がNGで接続できないので、
+@REM known_hosts の情報を一旦削除する
+ssh-keygen -R "%CONNECT_IP%"
+
+@REM 鍵認証方式でSSH接続
+@REM   known_hosts の情報を削除したことにより、
+@REM   新規接続時の yes/no の確認が毎回表示されるので、
+@REM   「-o StrictHostKeyChecking=no」で確認表示を行わないようにする
+ssh "%CONNECT_USER%@%CONNECT_IP%" -i "%CONNECT_KEY%" -o StrictHostKeyChecking=no
