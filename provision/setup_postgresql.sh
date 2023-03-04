@@ -46,49 +46,33 @@ echo "========================================"
 # postgres ユーザで SQL実行
 sudo -i -u postgres psql -f "${PROVISION_SQL_DIR}/create_user_db_group.sql"
 
-
-# 終了処理
-date
-echo "■ PostgreSQLのセットアップ 完了"
-exit 0
-
-
-# postgres ユーザで作成した DB にログインする
-psql -d sgpjdb01 -U postgres
-
-
-# root ユーザに切替
-su -
-
-# postgresql.conf を探す
-find / -name 'postgresql.conf'
-
-# postgresql.conf の情報確認
-ls -l /etc/postgresql-setup/upgrade/postgresql.conf
-ls -l /var/lib/pgsql/data/postgresql.conf
-ls -l /usr/lib/tmpfiles.d/postgresql.conf
-
-
-# postgresql.conf の内容確認
-cat /etc/postgresql-setup/upgrade/postgresql.conf
-cat /var/lib/pgsql/data/postgresql.conf
-cat /usr/lib/tmpfiles.d/postgresql.conf
-
-
 # postgresql.conf の内容変更
-sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/' /etc/postgresql-setup/upgrade/postgresql.conf
-sed -i 's/# port = 5432/port = 5432/' /etc/postgresql-setup/upgrade/postgresql.conf
+sed -i -e "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" -e 's/^#port/port/' /var/lib/pgsql/data/postgresql.conf
 
-sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/' /var/lib/pgsql/data/postgresql.conf
-sed -i 's/# port = 5432/port = 5432/' /var/lib/pgsql/data/postgresql.conf
-
-sed -i 's/#listen_addresses = 'localhost'/listen_addresses = '*'/' /usr/lib/tmpfiles.d/postgresql.conf
-sed -i 's/# port = 5432/port = 5432/' /usr/lib/tmpfiles.d/postgresql.conf
-
+# pg_hba.conf の内容変更
+sed -i 's/\(local *all *all *\)peer/\1md5/' /var/lib/pgsql/data/pg_hba.conf
+sed -i 's/\(host *all *all.* *\)ident/\1md5/' /var/lib/pgsql/data/pg_hba.conf
 
 # サービス再起動
 systemctl restart postgresql
 
-
 # サービス確認（activeになっていること）
 systemctl status postgresql
+
+
+#パスワード無しログインの設定
+# .pgpass の追加
+echo -e "localhost:5432:sgpjdb01:sugoroku:pass\nlocalhost:5432:sgpjdb01:storage:pass" > ~sugoroku/.pgpass
+
+# パーミッション変更
+chmod 600 ~sugoroku/.pgpass
+
+# パーミッションオーナー変更
+chown sugoroku:sugoroku ~sugoroku/.pgpass
+
+
+# 終了処理
+date
+echo "■ PostgreSQLのセットアップ 完了"
+
+exit 0
