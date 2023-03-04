@@ -6,7 +6,7 @@
             "detail": "VagrantのBoxファイルと仮想環境を作成、起動します",
             "type": "shell",
             "command": "${workspaceFolder}/script/mac/01_create_and_start.command",
-            "args": [],
+            "args": ["-y"],
             "group": "build",
             "presentation": {
               "reveal": "always",
@@ -15,7 +15,8 @@
             },
             "problemMatcher": [],
             "windows": {
-              "command": "${workspaceFolder}\\script\\windows\\01_create_and_start.bat"
+              "command": "${workspaceFolder}\\script\\windows\\01_create_and_start.bat",
+              "args": [],
             },
         },
         {
@@ -23,7 +24,7 @@
             "detail": "Vagrantで起動中の仮想環境を停止、Boxファイルと仮想環境を削除します",
             "type": "shell",
             "command": "${workspaceFolder}/script/mac/02_stop_and_remove.command",
-            "args": [],
+            "args": ["-y"],
             "group": "build",
             "presentation": {
               "reveal": "always",
@@ -32,7 +33,8 @@
             },
             "problemMatcher": [],
             "windows": {
-              "command": "${workspaceFolder}\\script\\windows\\02_stop_and_remove.bat"
+              "command": "${workspaceFolder}\\script\\windows\\02_stop_and_remove.bat",
+              "args": [],
             },
         },
         {
@@ -71,6 +73,23 @@
               "label": "[03-02] Vagrantサーバー Teraterm接続 (192.168.60.10)",
               "detail": "VagrantサーバーにTeratermで接続します",
               "command": "${workspaceFolder}\\script\\windows\\03_02_ssh_connect_hostonlyadapter.bat"
+            },
+        },
+        {
+            "label": "[04] Vagrantサーバー 状態確認",
+            "detail": "Vagrantサーバーの現在の状態を確認します",
+            "type": "shell",
+            "command": "${workspaceFolder}/script/mac/04_check_status.command",
+            "args": ["-y"],
+            "group": "build",
+            "presentation": {
+              "reveal": "always",
+              "clear": true,
+              "echo": true
+            },
+            "problemMatcher": [],
+            "windows": {
+              "command": "${workspaceFolder}\\script\\windows\\04_check_status.bat"
             },
         },
     ]
