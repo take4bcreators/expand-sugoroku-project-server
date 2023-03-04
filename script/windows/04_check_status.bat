@@ -8,6 +8,12 @@ set VAGRANT_FILE_DIR_ABS=..\..
 @REM --------------------------------------------------------------------------------------------
 
 
+@REM オプションチェック
+set askuser=true
+if "%~1" == "/Y" (
+    set askuser=false
+)
+
 @REM Vagrantfile が対象ディレクトリにない場合は終了
 cd %~dp0
 if not exist %VAGRANT_FILE_DIR_ABS%\Vagrantfile (
@@ -44,6 +50,8 @@ vagrant global-status
 echo.
 
 @REM ユーザー確認用メッセージ表示
-pause
+if "%askuser%" == "true" (
+    pause
+)
 
 exit /b 0

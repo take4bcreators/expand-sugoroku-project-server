@@ -10,9 +10,7 @@
         },
         "type": "shell",
         "command": "${workspaceFolder}/script/mac/01_create_and_start.command",
-        "args": [
-          "-y"
-        ],
+        "args": ["-y"],
         "group": "none",
         "presentation": {
           "reveal": "always",
@@ -22,13 +20,11 @@
         "problemMatcher": [],
         "windows": {
           "command": "${workspaceFolder}\\script\\windows\\01_create_and_start.bat",
-          "args": [],
+          "args": ["/Y"],
           "options": {
             "shell": {
               "executable": "${env:windir}\\system32\\cmd.exe",
-              "args": [
-                "/C"
-              ]
+              "args": ["/C"],
             }
           }
         }
@@ -42,9 +38,7 @@
         },
         "type": "shell",
         "command": "${workspaceFolder}/script/mac/02_stop_and_remove.command",
-        "args": [
-          "-y"
-        ],
+        "args": ["-y"],
         "group": "none",
         "presentation": {
           "reveal": "always",
@@ -54,13 +48,11 @@
         "problemMatcher": [],
         "windows": {
           "command": "${workspaceFolder}\\script\\windows\\02_stop_and_remove.bat",
-          "args": [],
+          "args": ["/Y"],
           "options": {
             "shell": {
               "executable": "${env:windir}\\system32\\cmd.exe",
-              "args": [
-                "/C"
-              ]
+              "args": ["/C"],
             }
           }
         }
@@ -88,9 +80,7 @@
           "options": {
             "shell": {
               "executable": "${env:windir}\\system32\\cmd.exe",
-              "args": [
-                "/C"
-              ]
+              "args": ["/C"],
             }
           }
         }
@@ -118,9 +108,7 @@
           "options": {
             "shell": {
               "executable": "${env:windir}\\system32\\cmd.exe",
-              "args": [
-                "/C"
-              ]
+              "args": ["/C"],
             }
           }
         }
@@ -134,9 +122,7 @@
         },
         "type": "shell",
         "command": "${workspaceFolder}/script/mac/04_check_status.command",
-        "args": [
-          "-y"
-        ],
+        "args": ["-y"],
         "group": "none",
         "presentation": {
           "reveal": "always",
@@ -146,13 +132,11 @@
         "problemMatcher": [],
         "windows": {
           "command": "${workspaceFolder}\\script\\windows\\04_check_status.bat",
-          "args": [],
+          "args": ["/Y"],
           "options": {
             "shell": {
               "executable": "${env:windir}\\system32\\cmd.exe",
-              "args": [
-                "/C"
-              ]
+              "args": ["/C"],
             }
           }
         }
