@@ -45,6 +45,8 @@ echo "========================================"
 
 # postgres ユーザで SQL実行
 sudo -i -u postgres psql -f "${PROVISION_SQL_DIR}/create_user_db_group.sql"
+sudo -i -u postgres psql -d sgpjdb01 -f "${PROVISION_SQL_DIR}/create_schema.sql"
+sudo -i -u sugoroku psql -d sgpjdb01 -f "${PROVISION_SQL_DIR}/grant_sugoroku.sql"
 
 # postgresql.conf の内容変更
 sed -i -e "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" -e 's/^#port/port/' /var/lib/pgsql/data/postgresql.conf
