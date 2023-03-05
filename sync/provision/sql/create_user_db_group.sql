@@ -8,9 +8,6 @@
 CREATE USER sugoroku;
 ALTER ROLE sugoroku CREATEROLE CREATEDB LOGIN;
 
--- ユーザ作成・ロール付与（storage）
-CREATE USER storage;
-ALTER ROLE storage CREATEROLE CREATEDB LOGIN;
 
 \echo '======= ユーザー作成後の状態 ======='
 \du
@@ -21,7 +18,6 @@ ALTER ROLE storage CREATEROLE CREATEDB LOGIN;
 -- @remind 暫定
 ALTER ROLE postgres WITH PASSWORD 'pass';
 ALTER ROLE sugoroku WITH PASSWORD 'pass';
-ALTER ROLE storage WITH PASSWORD 'pass';
 
 
 -- データベース作成
@@ -40,9 +36,13 @@ GRANT ALL ON DATABASE sgpjdb01 TO sugorokugrp;
 
 -- グループにユーザを追加
 ALTER GROUP sugorokugrp ADD USER sugoroku;
-ALTER GROUP sugorokugrp ADD USER storage;
 
 
 -- 終了メッセージ
 \echo '======= ユーザー・データベース・グループ作成SQL完了 ======='
 \! date
+
+
+
+
+
