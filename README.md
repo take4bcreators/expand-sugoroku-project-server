@@ -6,7 +6,9 @@
 - Vagrant がインストールされていること
 
 ## 実行条件
-- このリポジトリと同じレベルの階層に、メイン開発用リポジトリのフォルダ（expand-sugoroku-project-main）があること
+- このリポジトリと同じレベルの階層に、次のフォルダがあること（ない場合はcloneまたは手動作成すること）
+  - expand-sugoroku-project-batch
+  - expand-sugoroku-project-front
 - 次のファイルが存在すること（ない場合は Google Drive からダウンロードして配置する）
   - sync/env/provision.env
 
