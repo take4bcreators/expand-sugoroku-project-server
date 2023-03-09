@@ -24,7 +24,8 @@ Vagrant.configure("2") do |config|
   # 共有フォルダの指定（ローカルのパス, 仮想環境のパス）
   #  デフォルトでこの Vagrantfile があるフォルダ自体が共有されるが、disabled でOFFにしておく
   config.vm.synced_folder "./sync", "/mnt/sync"
-  config.vm.synced_folder "../expand-sugoroku-project-main", "/mnt/project/expand-sugoroku-project-main"
+  config.vm.synced_folder "../expand-sugoroku-project-batch", "/mnt/project/expand-sugoroku-project-batch"
+  config.vm.synced_folder "../expand-sugoroku-project-front", "/mnt/project/expand-sugoroku-project-front"
   config.vm.synced_folder ".", "/vagrant", disabled: true
   
   # プロビジョニング用スクリプトを指定
