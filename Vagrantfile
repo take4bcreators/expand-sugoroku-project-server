@@ -40,4 +40,5 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./provision/call_db_initialize.sh"
   config.vm.provision "shell", path: "./provision/setup_gatsby.sh"
   config.vm.provision "shell", path: "./provision/setup_rundeck.sh"
+  config.vm.provision "shell", path: "./provision/set_project_env.sh"
 end
