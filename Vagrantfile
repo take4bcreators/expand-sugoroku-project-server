@@ -22,10 +22,17 @@ Vagrant.configure("2") do |config|
   end
   
   # 共有フォルダの指定（ローカルのパス, 仮想環境のパス）
-  #  デフォルトでこの Vagrantfile があるフォルダ自体が共有されるが、disabled でOFFにしておく
+  # プロビジョニングシェル内で呼び出されるシェル・SQL格納用
   config.vm.synced_folder "./sync", "/mnt/sync"
-  config.vm.synced_folder "../expand-sugoroku-project-batch", "/mnt/project/expand-sugoroku-project-batch"
-  config.vm.synced_folder "../expand-sugoroku-project-front", "/mnt/project/expand-sugoroku-project-front"
+  # バッチ用リポジトリ
+  #  （権限も指定。ユーザー・グループは後から作成されるので UID・GID で指定する）
+  config.vm.synced_folder "../expand-sugoroku-project-batch", "/mnt/project/expand-sugoroku-project-batch",
+    mount_options: ["dmode=775", "fmode=775", "uid=456", "gid=1234"]
+  # フロント用リポジトリ
+  #  （権限も指定。ユーザー・グループは後から作成されるので UID・GID で指定する）
+  config.vm.synced_folder "../expand-sugoroku-project-front", "/mnt/project/expand-sugoroku-project-front",
+    mount_options: ["dmode=775", "fmode=775", "uid=456", "gid=1234"]
+  # デフォルトでこの Vagrantfile があるフォルダ自体が共有されるが、disabled でOFFにしておく
   config.vm.synced_folder ".", "/vagrant", disabled: true
   
   # プロビジョニング用スクリプトを指定
