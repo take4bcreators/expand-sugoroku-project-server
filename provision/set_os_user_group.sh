@@ -1,10 +1,18 @@
 #!/bin/bash
 
 # 設定値指定
+
+# ホストとサーバーで共有するディレクトリ名
 export SERVER_SYNC_DIR="/mnt/sync"
+# プロビジョニング用環境設定ファイルのパス
 export PROVISION_ENV_FILE="${SERVER_SYNC_DIR}/env/provision.env"
+# メインユーザー名
 export MAIN_USER_NAME="sugoroku"
-export MAIN_GROUP_NAME="sugorokugrp"
+# メインユーザーのUID
+export MAIN_USER_UID="456"
+# メインで使用するグループ名
+export MAIN_GROUP_NAME="maingrp"
+# メインで使用するグループのGID
 export MAIN_GROUP_GID="1234"
 
 
@@ -19,6 +27,7 @@ if [ ! -f "${PROVISION_ENV_FILE}" ]; then
     echo "ERROR  ${PROVISION_ENV_FILE} が存在しません"
     exit 1
 fi
+# shellcheck source=../sync/env/provision.env
 source "${PROVISION_ENV_FILE}"
 
 # 必要な変数の存在確認
@@ -40,7 +49,7 @@ echo "===================================="
 
 
 # ユーザの追加
-useradd -c "mainuser" -G "${MAIN_GROUP_GID}" "${MAIN_USER_NAME}"
+useradd -u "${MAIN_USER_UID}" -G "${MAIN_GROUP_GID}" "${MAIN_USER_NAME}"
 
 # パスワード変更
 echo "${ENV_MAIN_USER_PASS}" | passwd --stdin "${MAIN_USER_NAME}"
