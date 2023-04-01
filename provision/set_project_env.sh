@@ -12,6 +12,7 @@ USER_HOME_LIST=(
     ~vagrant
     ~sugoroku
     ~postgres
+    ~rundeck
 )
 
 
