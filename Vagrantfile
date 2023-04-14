@@ -11,7 +11,11 @@ Vagrant.configure("2") do |config|
   
   # ネットワーク設定を追加する（ホストオンリーアダプター）
   #  設定可能範囲：192.168.56.1 〜 192.168.63.254
-  # config.vm.network "private_network", ip: "192.168.60.10"
+  config.vm.network "private_network", ip: "192.168.60.10"
+  
+  # ポートフォワード設定
+  config.vm.network "forwarded_port", guest: 4440, host: 4440  # Rundeck用
+  config.vm.network "forwarded_port", guest: 8000, host: 8000  # Gatsby用
   
   # VirtualBox の設定
   config.vm.provider "virtualbox" do |vb|
@@ -49,4 +53,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./provision/setup_rundeck.sh"
   config.vm.provision "shell", path: "./provision/set_project_env.sh"
   config.vm.provision "shell", path: "./provision/restart_rundeck.sh"
+  config.vm.provision "shell", path: "./provision/create_rundeck_project.sh"
+  config.vm.provision "shell", path: "./provision/register_rundeck_job.sh"
 end
