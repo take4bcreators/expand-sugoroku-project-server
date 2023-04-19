@@ -55,4 +55,5 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./provision/restart_rundeck.sh"
   config.vm.provision "shell", path: "./provision/create_rundeck_project.sh"
   config.vm.provision "shell", path: "./provision/register_rundeck_job.sh"
+  config.vm.provision "shell", path: "./provision/call_batch_side_initialize.sh"
 end
