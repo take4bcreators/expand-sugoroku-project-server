@@ -13,8 +13,4 @@ npm install -g yarn
 # インストール（npmではなくyarnで行う）
 yarn global add gatsby-cli
 
-# Puppeteerインストール（HTML→PDF変換用のモジュール）
-yarn global add puppeteer
-
-
 exit 0
