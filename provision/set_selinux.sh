@@ -8,6 +8,9 @@ date
 # selinuxの無効化設定
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 
+# 次のリブートまでの無効化
+setenforce 0
+
 echo "======= selinuxの無効化設定後の状態 ======="
 getenforce
 echo "==========================================="
