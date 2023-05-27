@@ -12,8 +12,11 @@ echo "■ PostgreSQLのセットアップ 開始"
 date
 
 
+# Postgresql のバージョン 13 を有効化
+dnf module enable postgresql:13 -y
+
 # PostgreSQL のインストール
-dnf -y install postgresql-server
+dnf -y install postgresql postgresql-server
 
 # インストール後バージョン確認
 echo "======= psql追加後の状態 ======="

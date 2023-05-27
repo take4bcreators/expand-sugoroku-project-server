@@ -13,6 +13,10 @@ Vagrant.configure("2") do |config|
   #  設定可能範囲：192.168.56.1 〜 192.168.63.254
   config.vm.network "private_network", ip: "192.168.60.10"
   
+  # ポートフォワード設定
+  config.vm.network "forwarded_port", guest: 4440, host: 4440  # Rundeck用
+  config.vm.network "forwarded_port", guest: 8000, host: 8000  # Gatsby用
+  
   # VirtualBox の設定
   config.vm.provider "virtualbox" do |vb|
     vb.name = "SgpjServer"    # 仮想マシン名
@@ -22,10 +26,17 @@ Vagrant.configure("2") do |config|
   end
   
   # 共有フォルダの指定（ローカルのパス, 仮想環境のパス）
-  #  デフォルトでこの Vagrantfile があるフォルダ自体が共有されるが、disabled でOFFにしておく
+  # プロビジョニングシェル内で呼び出されるシェル・SQL格納用
   config.vm.synced_folder "./sync", "/mnt/sync"
-  config.vm.synced_folder "../expand-sugoroku-project-batch", "/mnt/project/expand-sugoroku-project-batch"
-  config.vm.synced_folder "../expand-sugoroku-project-front", "/mnt/project/expand-sugoroku-project-front"
+  # バッチ用リポジトリ
+  #  （権限も指定。ユーザー・グループは後から作成されるので UID・GID で指定する）
+  config.vm.synced_folder "../expand-sugoroku-project-batch", "/mnt/project/expand-sugoroku-project-batch",
+    mount_options: ["dmode=775", "fmode=775", "uid=456", "gid=1234"]
+  # フロント用リポジトリ
+  #  （権限も指定。ユーザー・グループは後から作成されるので UID・GID で指定する）
+  config.vm.synced_folder "../expand-sugoroku-project-front", "/mnt/project/expand-sugoroku-project-front",
+    mount_options: ["dmode=775", "fmode=775", "uid=456", "gid=1234"]
+  # デフォルトでこの Vagrantfile があるフォルダ自体が共有されるが、disabled でOFFにしておく
   config.vm.synced_folder ".", "/vagrant", disabled: true
   
   # プロビジョニング用スクリプトを指定
@@ -41,4 +52,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./provision/setup_gatsby.sh"
   config.vm.provision "shell", path: "./provision/setup_rundeck.sh"
   config.vm.provision "shell", path: "./provision/set_project_env.sh"
+  config.vm.provision "shell", path: "./provision/restart_rundeck.sh"
+  config.vm.provision "shell", path: "./provision/create_rundeck_project.sh"
+  config.vm.provision "shell", path: "./provision/register_rundeck_job.sh"
+  config.vm.provision "shell", path: "./provision/call_batch_side_initialize.sh"
 end
